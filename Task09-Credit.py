@@ -1,37 +1,40 @@
-def annu_pay(i, n, s):
+def annuitentny_platezh(i, n, s):
     # Вычисдяем по формуле из задачи
-    k = i * (i * (1 + i) ** n) / ((1 + i) ** n - 1)
+    # i - процент
+    # n - количество лет
+    # s - сумма кредита
+    k =  i * (1 + i) ** n / ((1 + i) ** n - 1)
     a = k * s
     return a  # размер аннуитентного платежа
 
 
-def calc_pay(i, n, s):
-    # Вычисляем разность аннуитентный алатеж - проценты
-    payd_percent = s * i  # выплаченные проценты
-    pay_credit = annu_pay(i, n, s) - payd_percent
-    return pay_credit
+def calc_body_credit(a, s, i):
+    return a - (s * i)
 
-def calc_body(s, percent_credit):
-    return s - percent_credit
+
+def viplachennye_percent(s, i):
+    return s * i
+
 
 s = float(input("Введите сумму кредита: "))
 n = float(input("На сколько лет выдан? "))
 i = float(input("Сколько процентов годовых? "))
 
-
-# paid interests - выплаченные проценты
-# body_credit - тело кредита
-# anuit_pay - аннуитентный платеж
-
-percent_credit = calc_pay(i, n, s)
-body_credit = s -
+i /= 100
+a = annuitentny_platezh(i, n, s)
 
 period = 0
-summa_credit = 0
+vp = 0  # выплаченные проценты
+body = 0 # тело кредита
+
 while period <= n:
     period += 1
-    summa_credit = s - summa_credit
-    print("Период:", n)
-    print("Остаток долга на начало периода:")
-    print("Выплачено процентов:")
-    print("Выплачено тела кредита:")
+    s -= vp
+    vp = viplachennye_percent(s, i)
+    body = calc_body_credit(a, s, i)
+
+    print("\nПериод:", period)
+    print("Остаток долга на начало периода:", s)
+    print("Выплачено процентов:", vp)
+    print("Выплачено тела кредита:", body)
+
