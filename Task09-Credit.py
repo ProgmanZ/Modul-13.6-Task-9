@@ -50,8 +50,10 @@ while count <= n:
         a = annuitentny_platezh(i, n, s)
         period = 0
         flag = False
+        count = 0
 
     count += 1
     period += 1
 
+print("\nОстаток долга: ", s)
 
